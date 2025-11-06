@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Expense Tracker</title>
+    <style>
+        /* Apply background image and style to body */
+        body {
+            background-image: url('/static/expense_background.webp');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for header section */
+        .header {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        /* Style for main container */
+        .container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        /* Style for expense list and total button */
+        .expense-list {
+            width: 50%;
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #fff;
+        }
+
+        th {
+            background-color: #06b4e9;
+            color: white;
+        }
+        td {
+            background-color: white;
+            color: #06b4e9;
+        }
+
+        /* Style for the Add Expense form */
+        .add-expense {
+            width: 30%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        form {
+            margin: 0 auto;
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #06b4e9;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style for the total expense button */
+        .total-expense-button {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section with icon and title -->
+    <div class="header">
+        <img src="/static/expense_icon.webp" alt="Expense Tracker Icon" style="width: 50px; height: 50px;">
+        <h1>Expense Tracker</h1>
+        <a href="{{ url_for('logout') }}" style="color: white;">Logout</a>
+    </div>
+
+    <!-- Main container with expense list on the left and add expense form centered -->
+    <div class="container">
+        <!-- Expense list section -->
+        <div class="expense-list">
+            <h1>Expense List</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Amount(INR)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense['description'] }}</td>
+                        <td>{{ expense['amount'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- Check total expense button -->
+            <div class="total-expense-button">
+                <form action="{{ url_for('stats') }}" method="get">
+                    <input type="submit" value="Check Total Expense">
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Expense section -->
+        <div class="add-expense">
+            <h2>Add Expense</h2>
+            <form method="POST" action="{{ url_for('add_expense') }}">
+                <label for="description">Description:</label>
+                <input type="text" name="description" required><br>
+                <label for="amount">Amount:</label>
+                <input type="number" step="0.01" name="amount" required><br>
+                <input type="submit" value="Add">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    <style>
+        /* Apply background image and style to body */
+        body {
+            background-image: url('/static/expense_background.webp');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for header section */
+        .header {
+            background-color: black;
+            color: white;
+            display: flex;
+        }
+
+        /* Style for form elements */
+        form {
+            margin: 0 auto;
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #06b4e9;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section with icon and title -->
+    <div class="header">
+        <img src="/static/expense_icon.webp" alt="Expense Tracker Icon" style="width: 50px; height: 50px;">
+        <h1>Expense Tracker</h1>
+    </div>
+
+    <!-- Main content area for login form -->
+    <div>
+    <h2>Add Expense</h2>
+    <form method="POST" action="{{ url_for('add_expense') }}">
+        <label for="description" style="text-align: left;">Description:</label>
+        <input type="text" id="description" name="description" required><br><br>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required><br><br>
+        <input type="submit" value="Add Expense">
+    </form>
+</body>
+</html>

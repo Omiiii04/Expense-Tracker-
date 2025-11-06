@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Statistics</title>
+    <style>
+        /* Apply background image and style to body */
+        body {
+            background-image: url('/static/expense_background.webp');
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style for header section */
+        .header {
+            background-color: black;
+            color: white;
+            display: flex;
+        }
+
+        /* Style for main content */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #fff;
+        }
+
+        th {
+            background-color: #06b4e9;
+            color: white;
+        }
+
+        td {
+            background-color: white;
+            color: #06b4e9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section with icon and title -->
+    <div class="header">
+        <img src="/static/expense_icon.webp" alt="Expense Tracker Icon" style="width: 50px; height: 50px;">
+        <h1>Expense Tracker</h1>
+    </div>
+
+    <!-- Main content area for expense statistics -->
+    <div class="container">
+        <h1>Expense Statistics</h1>
+        
+        <!-- Daily totals table -->
+        <h2>Total Amount Per Day</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Total Amount(INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in daily_totals %}
+                <tr>
+                    <td>{{ record.date }}</td>
+                    <td>₹{{ record.total_amount }}</td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <!-- Monthly totals table -->
+        <h2>Total Amount Per Month</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Month</th>
+                    <th>Total Amount(INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in monthly_totals %}
+                <tr>
+                    <td>{{ record.year }}</td>
+                    <td>{{ record.month }}</td>
+                    <td>₹{{ record.total_amount }}</td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Yearly totals table -->
+        <h2>Total Amount Per Year</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Year</th>
+                    <th>Total Amount(INR)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in yearly_totals %}
+                <tr>
+                    <td>{{ record.year }}</td>
+                    <td>₹{{ record.total_amount }}</td> 
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
